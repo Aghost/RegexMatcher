@@ -18,7 +18,8 @@ namespace Matcher.Business
 
             for (int i = 1; i <= n; i++ ) {
                 for (int j = 1; j <= m; j++) {
-                    d[i,j] = Math.Min(Math.Min(d[i-1,j] + 1, d[i,j-1] + 1), d[i-1,j-1] + ((s_to[j - 1] == s_from[i - 1]) ? 0 : 1));
+                    // current_square = check lowest of (above value, left value, aboveleft + ((current_char_to == current_char_from)) ? 0 : 1)
+                    d[i,j] = Math.Min(Math.Min(d[i - 1, j] + 1, d[i , j - 1] + 1), d[i - 1, j - 1] + ((s_to[j - 1] == s_from[i - 1]) ? 0 : 1));
                 }
             }
 

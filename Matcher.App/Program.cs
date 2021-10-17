@@ -17,29 +17,28 @@ namespace Matcher.App
 
     public class Solution
     {
-        //https://www.youtube.com/watch?v=l3hda49XcDE
-        public static bool isMatch(string str, string pattern) {
-            bool[][] bArr = new bool[str.Length + 1][];
+        public static bool isMatch(string s, string p) {
+            bool[][] bArr = new bool[s.Length + 1][];
 
             for (int i = 0; i < bArr.Length; i++) {
-                bArr[i] = new bool[pattern.Length + 1];
+                bArr[i] = new bool[p.Length + 1];
             }
 
             bArr[0][0] = true;
 
             for (int i = 1; i < bArr[0].Length; i++) {
-                if (pattern[i - 1] == '*') {
+                if (p[i - 1] == '*') {
                     bArr[0][i] = bArr[0][i - 2];
                 }
             }
 
             for (int i = 1; i < bArr.Length; i++) {
                 for (int j = 1; j < bArr[0].Length; j++) {
-                    if (pattern[j - 1] == '.' || pattern[j - 1] == str[i - 1]) {
+                    if (p[j - 1] == '.' || p[j - 1] == s[i - 1]) {
                         bArr[i][j] = bArr[i - 1][j - 1];
-                    } else if (pattern[j - 1] == '*') {
+                    } else if (p[j - 1] == '*') {
                         bArr[i][j] = bArr[i][j - 2];
-                        if (pattern[j - 2] == '.' || pattern[j - 2] == str[i - 1]) {
+                        if (p[j - 2] == '.' || p[j - 2] == s[i - 1]) {
                             bArr[i][j] = bArr[i][j] | bArr[i - 1][j];
                         }
                     } else {
@@ -48,7 +47,7 @@ namespace Matcher.App
                 }
             }
 
-            return bArr[str.Length][pattern.Length];
+            return bArr[s.Length][p.Length];
         }
 
     }

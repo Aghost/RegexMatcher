@@ -19,7 +19,14 @@ namespace Matcher.App
                         input = ReadLine();
 
                         Write("input pattern to match: ");
-                        WriteLine(regex.isMatch(input, ReadLine()));
+                        WriteLine(regex.IsMatch(input, ReadLine()));
+                        break;
+                    case "regex2":
+                        Write("input string: ");
+                        input = ReadLine();
+
+                        Write("input pattern to match: ");
+                        WriteLine(regex.IsMatchRecursive(input, ReadLine()));
                         break;
                     case "distance":
                         Write("input string: ");

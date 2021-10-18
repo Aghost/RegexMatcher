@@ -4,7 +4,7 @@ namespace Matcher.Business
 {
     public class SimpleRegex
     {
-        public static bool isMatch(string s, string p) {
+        public static bool IsMatch(string s, string p) {
             // Create 2d "truth" table, + 1 extra row and column for the results
             bool[][] bArr = new bool[s.Length + 1][];
 
@@ -44,6 +44,31 @@ namespace Matcher.Business
             }
 
             return bArr[s.Length][p.Length];
+        }
+
+        public static bool IsMatchRecursive(string s, string p) {
+            return IsMatchR(s, p, 0, 0);
+        }
+
+        public static bool IsMatchR(string s, string p, int i, int j) {
+            if (j >= p.Length) {
+                return i >= s.Length && j >= p.Length;
+            }
+
+            if (j + 1 < p.Length && p[j + 1] == '*') {
+                while (i < s.Length && (s[i] == p[j] || p[j] == '.')) {
+                    if (IsMatchR(s, p, i, j + 2)) {
+                        return true;
+                    }
+
+                    i++;
+                }
+                return IsMatchR(s, p, i, j + 2);
+            } else if (i < s.Length && (s[i] == p[j] || p[j] == '.')) {
+                return IsMatchR(s, p, i + 1, j + 1);
+            }
+
+            return false;
         }
 
     }
